@@ -2,7 +2,7 @@
 	Par  : Chuan DONG
 	Date : 23/09/2013
 
-	Ce module est de décrire des fonctions de bits.h
+	Ce module est de définir des fonctions de bits.h
 ****************************************************************************************/
 
 #include "bits.h"

@@ -21,9 +21,6 @@
     <ClCompile Include="test_bits.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tp1.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bits.h">
