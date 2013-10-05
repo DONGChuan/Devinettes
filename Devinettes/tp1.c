@@ -1,3 +1,19 @@
+﻿/****************************************************************************************
+	Par  : Chuan DONG
+	Date : 23/09/2013
+
+	C'est dans ce module que vous implémenterez le jeu de devinettes.
+
+	- afficher_grille_nombre       : Cette fonction  affiche à l'écran une grille de 10 lignes et 10 colonnes.
+	- afficher_introduction        : Cette fonction affiche à l'utilisateur des instructions concernant le jeu 
+								     et attend qu'il appuie sur une touche avant de continuer.
+	- indice_prochain_bit_a_tester : Cette fonction choisit aléatoirement un bit n'ayant pas encore été testé et 
+	                                 retourne son indice.
+	- main                         : Cette fonction initialise le générateur de nombres aléatoires.
+	- nb_aléatoire                 : Cette fonction choisit aléatoirement et retourne un nombre entre ces deux bornes.
+	- utilisateur_voit_son_nombre  : Cette fonction demande à l'utilisateur s’il voit son nombre à l’écran.
+****************************************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -5,18 +21,18 @@
 #include "bits.h"
 
 /****************************************************************************************
-							D�CLARATIONS DE FONCTIONS
+							D蒀LARATIONS DE FONCTIONS
 ****************************************************************************************/
 /*
 	NB_ALEATOIRE
 
-	Cette fonction retourne un nombre al�atoire entier dans l'intervalle [min, max].
-	Chaque valeur de l'intervalle poss�de la m�me probabilit� d'�tre choisi.
+	Cette fonction retourne un nombre al閍toire entier dans l'intervalle [min, max].
+	Chaque valeur de l'intervalle poss鑔e la m阭e probabilit?d'阾re choisi.
 
-	PARAM�TRES :
-		- min : La plus petite valeur pouvant �tre g�n�r�e (type : int).
-		- max : La plus grande valeur pouvant �tre g�n�r�e (type : int).
-				On suppose que min est plus petit ou �gal � max.
+	PARAM萒RES :
+		- min : La plus petite valeur pouvant 阾re g閚閞閑 (type : int).
+		- max : La plus grande valeur pouvant 阾re g閚閞閑 (type : int).
+				On suppose que min est plus petit ou 間al ?max.
 	
 	VALEUR DE RETOUR : Un nombre dans l'intervalle [min, max] (type : int).
 */
@@ -25,7 +41,7 @@ int nb_aleatoire(int min, int max);
 /*
 	AFFICHER_INTRODUCTION
 
-	Cette fonction affiche � l'utilisateur des instructions concernant le jeu et attend
+	Cette fonction affiche ?l'utilisateur des instructions concernant le jeu et attend
 	qu'il appuie sur une touche avant de continuer.
 */
 void afficher_introduction(void);
@@ -33,30 +49,59 @@ void afficher_introduction(void);
 /*
 	INDICE_PROCHAIN_BIT_A_TESTER
 
-	Cette fonction re�oit un nombre de 8 bits repr�sentant l'�tat de test de chaque 
-	bit. La fonction choisit al�atoirement un bit n'ayant pas encore �t� test� et 
+	Cette fonction re鏾it un nombre de 8 bits repr閟entant l'閠at de test de chaque 
+	bit. La fonction choisit al閍toirement un bit n'ayant pas encore 閠?test?et 
 	retourne son indice.
+
+	PARAM萒RES :
+		- char : Le caractere à tester (type : unsigned char).
+
+	VALEUR DE RETOUR : Indice du bit à tester (type : int).
 */
 int indice_prochain_bit_a_tester(unsigned char car);
-void afficher_grille_nombre(int indice);
-int utilisateur_voit_son_nombre(void);
 
+/*
+	AFFICHER_GRILLE_NOMBRE
+
+	Cette fonction reçoit le bit actuellement testé. Elle affiche à l'écran une grille de 10
+	lignes et 10 colonnes. Tous les nombres ayant un bit actif pour le bit actuellement testé
+	sont affichés dans la grille. Tous les nombres n'ayant pas ce bit actif sont remplacés par
+	3 espaces.
+
+	PARAM萒RES :
+		- indice : Le indice du bit actuellement testé (type : int).
+*/
+void afficher_grille_nombre(int indice);
+
+/*
+	UTILISATEUR_VOIT_SON_NOMBRE
+
+	Cette fonction demande à l'utilisateur s’il voit son nombre à l’écran. La fonction
+	redemande à l'utilisateur la question tant qu'il n'a pas entré l’un des caractères
+	suivants : 'o', 'O', 'n' ou 'N'. La fonction retourne 1 lorsque l'utilisateur entre
+	'o' ou 'O' et 0 dans le cas contraire.
+
+	VALEUR DE RETOUR : Un nombre entier pour indiquer la réponse de l'utilisateur(type : int).
+*/
+int utilisateur_voit_son_nombre(void);
 
 /****************************************************************************************
 								FONCTION MAIN()
 ****************************************************************************************/
 int main(void)
 {
-	unsigned char list_test_bit;
-	unsigned char resultat_bit;
-	int i;
-	int indice;  /* Indice de bit a tester */
-	int reponse_exist; /* Reponse de l'utilisateur */
+	unsigned char list_test_bit; /* List des bits indiquant les bits n'ont pas être testé */
+	unsigned char resultat_bit;  /* Le résultat du devinette                              */
+	int i;                       /* Variable pour bloc FOR                                */
+	int indice;                  /* Indice de bit a tester                                */
+	int reponse_exist;           /* Reponse de l'utilisateur                              */
 
+	/* Initialiser des variables */
 	list_test_bit = 0;
 	resultat_bit = 0;
 	reponse_exist = 0;
 
+	/* Affichie l'introduction */
 	afficher_introduction();
 
 	for(i=0;i<7;i++)
@@ -74,6 +119,7 @@ int main(void)
 		}	
 	}
 
+	/* Affiche le résultat */
 	printf("\n");
 	printf("Le resultat :\n");
 	printf("%i - (",resultat_bit);
@@ -84,23 +130,21 @@ int main(void)
 }
 
 
-
-
 /****************************************************************************************
-								D�FINITIONS DE FONCTIONS
+								D蒄INITIONS DE FONCTIONS
 ****************************************************************************************/
 /*
 	Explication de l'expression :
 	- rand()
-	  Une valeur enti�re dans l'intervalle [0, RAND_MAX].
+	  Une valeur enti鑢e dans l'intervalle [0, RAND_MAX].
 	- rand() / (RAND_MAX + 0.0000001)
-	  Une valeur r�elle dans l'intervalle [0, 1[.
+	  Une valeur r閑lle dans l'intervalle [0, 1[.
 	- rand() / (RAND_MAX + 0.0000001) * (max - min + 1)
-	  Une valeur r�elle dans l'intervalle [0, max - min + 1[.
+	  Une valeur r閑lle dans l'intervalle [0, max - min + 1[.
 	- (int)(rand() / (RAND_MAX + 0.0000001) * (max - min + 1))
-	  Une valeur enti�re dans l'intervalle [0, max - min].
+	  Une valeur enti鑢e dans l'intervalle [0, max - min].
 	- min + (int)(rand() / (RAND_MAX + 0.0000001) * (max - min + 1))
-	  Une valeur enti�re dans l'intervalle [min, max].
+	  Une valeur enti鑢e dans l'intervalle [min, max].
 */
 int nb_aleatoire(int min, int max)
 {
@@ -115,28 +159,31 @@ void afficher_introduction(void)
 	printf("celui-ce devinera le nombre que vous avez choisi!\n");
 	printf("\n");
 	printf("Press any key to continue . . . .");
-	getchar();
+	getchar(); /* Une pause qui attend l'import quel input de l'utilisateur */
 }
 
 int indice_prochain_bit_a_tester(unsigned char car)
 {
-	int indice;		/* */
+	int indice;	/* Indice du bit à tester */
 
-	/* */
+	/* Méthode 1 */
 	do
-	{
+	{       
 		indice = nb_aleatoire(0, NB_BITS_CHAR - 2);
 	}while(get_bit(car, indice) == 1);
+
+	/*
+			Méthode 2 :
+			indice = nth_bit(car, 0, nb_aleatoire(1, count(car, 0)));
+	*/
 
 	return indice;
 }
 
-
-
 void afficher_grille_nombre(int indice)
 {
-	int i,j;
-	unsigned char car;
+	int i,j;           /* Lignes et colonnes */
+	unsigned char car; /* Caractère à tester */
 
 	car = 1;
 
@@ -144,13 +191,13 @@ void afficher_grille_nombre(int indice)
 	{
 		for(j=0;j<10;j++)
 		{
-			if(get_bit(car, indice) == 1)
+			if(get_bit(car, indice) == 1) /* Si la valeur du bit est 1   */
 			{
-				printf("%3i ", car);
+				printf("%3i ", car); /* Chaque nombre s'occupe 3 espaces */
 			}
 			else
 			{
-				printf("    ");
+				printf("    "); /* 4 espaces pour remplir les nombres n'ayant pas ce bit */
 			}
 			car++;
 		}
@@ -160,12 +207,16 @@ void afficher_grille_nombre(int indice)
 
 int utilisateur_voit_son_nombre(void)
 {
-	char reponse;
+	char reponse; /* Réponse de l'utilisateur */
 
 	printf("Voyez-vous votre nombre a l'ecran <o / n> ?");
 	scanf("%c", &reponse);
 	getchar();
 
+	/* 
+		Si l'utilisateur entre d'autre réponse, on va relancer ce bloc 
+		pour attendre une réponse correcte 
+	*/
 	while(reponse != 'o' && reponse != 'O' && reponse != 'n' && reponse != 'N')
 	{ 
 		printf("Error : enter o ou n, svp");
@@ -173,11 +224,11 @@ int utilisateur_voit_son_nombre(void)
 		scanf("%c", &reponse);
 	}
 
-	if(reponse == 'o' || reponse == 'O')
+	if(reponse == 'o' || reponse == 'O') /* Si l'utilisateur voit ce nombre */
 	{
 		return 1;
 	}
-	else if(reponse == 'n' || reponse == 'N')
+	else if(reponse == 'n' || reponse == 'N') /* Si l'utilisateur ne voit pas le nombre */
 	{
 		return 0;
 	}

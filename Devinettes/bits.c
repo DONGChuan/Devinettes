@@ -37,8 +37,8 @@ int get_bit(unsigned char car, int indice_bit)
 	char car_filp = 1; /* Filtrage pour trouver la position d'un bit         */
 	int valeur_bit;
 
-	car &= (car_filp << indice_bit); /* Mettre tous les autres bits à 0      */
-	car >>= indice_bit;              /* Déplacer le bit d'indice_bit à droit */
+	car &= (car_filp << indice_bit); /* Mettre tous les autres bits ?0      */
+	car >>= indice_bit;              /* Déplacer le bit d'indice_bit ?droit */
 	valeur_bit = car&1;              /* Obtenir la valeur de ce bit          */
 
 	return valeur_bit;
@@ -47,7 +47,7 @@ int get_bit(unsigned char car, int indice_bit)
 /* set_bit: Fixe la valeur d'un bit */
 unsigned char set_bit(unsigned char car, int indice_bit, int valeur_bit)
 {
-	char car_changed;  /* Le un caractère modifié                    */
+	char car_changed;  /* Le un caractère modifi?                   */
 	char car_filp = 1; /* Filtrage pour trouver la position d'un bit */
 	int valeur_bit_car;
 
@@ -69,7 +69,7 @@ unsigned char set_bit(unsigned char car, int indice_bit, int valeur_bit)
 	return car_changed;
 }
 
-/* set_bits: Fixe la valeur des bits dans un intervalle donné */
+/* set_bits: Fixe la valeur des bits dans un intervalle donn?*/
 unsigned char set_bits(unsigned char car, int indice_debut, int indice_fin, int valeur_bit)
 {
 	int i; /* Variable pour bloc FOR */
@@ -100,7 +100,7 @@ unsigned char flip_bit(unsigned char car, int indice_bit){
 	return car;
 }
 
-/* flip_bits: Inverse la valeur des bits dans un intervalle donné */
+/* flip_bits: Inverse la valeur des bits dans un intervalle donn?*/
 unsigned char flip_bits(unsigned char car, int indice_debut, int indice_fin)
 {
 	int i; /* Variable pour bloc FOR */
@@ -123,7 +123,7 @@ int nth_bit(unsigned char car, int valeur_bit, int n)
 	int i = 0;         /* Indice du bit                        */
 	int count_bit = 0; /* Nombre de bit égalant valeur_bit     */
 
-	/* Jusqu'à nieme bit valant 0 ou 1, on s'arrete de compter */
+	/* Jusqu'?nieme bit valant 0 ou 1, on s'arrete de compter */
 	while(count_bit != n) 
 	{
 		if(get_bit(car, i) == valeur_bit) 
@@ -134,7 +134,7 @@ int nth_bit(unsigned char car, int valeur_bit, int n)
 		i++;
 	}
 
-	/* Indice du bit commence à 0 donc moins un pour obtenir l'indice */
+	/* Indice du bit commence ?0 donc moins un pour obtenir l'indice */
 	i--; 
 
 	return i; 
