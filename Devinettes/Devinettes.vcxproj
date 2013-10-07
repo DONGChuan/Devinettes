@@ -77,6 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bits.c" />
+    <ClCompile Include="test_bits.c" />
     <ClCompile Include="tp1.c" />
   </ItemGroup>
   <ItemGroup>

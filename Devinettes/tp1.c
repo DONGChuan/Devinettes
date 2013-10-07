@@ -21,18 +21,18 @@
 #include "bits.h"
 
 /****************************************************************************************
-							D蒀LARATIONS DE FONCTIONS
+							DECLARATIONS DE FONCTIONS
 ****************************************************************************************/
 /*
 	NB_ALEATOIRE
 
-	Cette fonction retourne un nombre al閍toire entier dans l'intervalle [min, max].
-	Chaque valeur de l'intervalle poss鑔e la m阭e probabilit?d'阾re choisi.
+	Cette fonction retourne un nombre aléatoire entier dans l'intervalle [min, max].
+	Chaque valeur de l'intervalle possèdee la même probabilité d'être choisi.
 
-	PARAM萒RES :
-		- min : La plus petite valeur pouvant 阾re g閚閞閑 (type : int).
-		- max : La plus grande valeur pouvant 阾re g閚閞閑 (type : int).
-				On suppose que min est plus petit ou 間al ?max.
+	PARAMÈTRES :
+		- min : La plus petite valeur pouvant être générée (type : int).
+		- max : La plus grande valeur pouvant être générée (type : int).
+				On suppose que min est plus petit ou égal à max.
 	
 	VALEUR DE RETOUR : Un nombre dans l'intervalle [min, max] (type : int).
 */
@@ -49,11 +49,10 @@ void afficher_introduction(void);
 /*
 	INDICE_PROCHAIN_BIT_A_TESTER
 
-	Cette fonction re鏾it un nombre de 8 bits repr閟entant l'閠at de test de chaque 
-	bit. La fonction choisit al閍toirement un bit n'ayant pas encore 閠?test?et 
-	retourne son indice.
+	Cette fonction reçoit un nombre de 8 bits représentant l'état de test de chaque bit. La 
+	fonction choisit aléatoirement un bit n'ayant pas encore été testé et retourne son indice. 
 
-	PARAM萒RES :
+	PARAMÈTRES :
 		- char : Le caractere à tester (type : unsigned char).
 
 	VALEUR DE RETOUR : Indice du bit à tester (type : int).
@@ -68,7 +67,7 @@ int indice_prochain_bit_a_tester(unsigned char car);
 	sont affichés dans la grille. Tous les nombres n'ayant pas ce bit actif sont remplacés par
 	3 espaces.
 
-	PARAM萒RES :
+	PARAMÈTRES :
 		- indice : Le indice du bit actuellement testé (type : int).
 */
 void afficher_grille_nombre(int indice);
@@ -131,20 +130,20 @@ int main(void)
 
 
 /****************************************************************************************
-								D蒄INITIONS DE FONCTIONS
+								DEINITIONS DE FONCTIONS
 ****************************************************************************************/
 /*
 	Explication de l'expression :
 	- rand()
-	  Une valeur enti鑢e dans l'intervalle [0, RAND_MAX].
+	  Une valeur entière dans l'intervalle [0, RAND_MAX].
 	- rand() / (RAND_MAX + 0.0000001)
-	  Une valeur r閑lle dans l'intervalle [0, 1[.
+	  Une valeur réelle dans l'intervalle [0, 1[.
 	- rand() / (RAND_MAX + 0.0000001) * (max - min + 1)
-	  Une valeur r閑lle dans l'intervalle [0, max - min + 1[.
+	  Une valeur réelle dans l'intervalle [0, max - min + 1[.
 	- (int)(rand() / (RAND_MAX + 0.0000001) * (max - min + 1))
-	  Une valeur enti鑢e dans l'intervalle [0, max - min].
+	  Une valeur entière dans l'intervalle [0, max - min].
 	- min + (int)(rand() / (RAND_MAX + 0.0000001) * (max - min + 1))
-	  Une valeur enti鑢e dans l'intervalle [min, max].
+	  Une valeur entière dans l'intervalle [min, max].
 */
 int nb_aleatoire(int min, int max)
 {
