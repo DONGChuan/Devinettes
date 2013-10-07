@@ -2,7 +2,9 @@
 	Par  : Chuan DONG
 	Date : 23/09/2013
 
-	C'est dans ce module que vous implémenterez le jeu de devinettes.
+	Le programme à produire consiste en un jeu de devinettes entre l'ordinateur et l'utilisateur. 
+	L'ordinateur demande à l’utilisateur de choisir un nombre compris entre 1 et 100 et lui 
+	annonce qu’il devinera ce nombre. C'est dans ce module que vous implémenterez le jeu de devinettes.
 
 	- afficher_grille_nombre       : Cette fonction  affiche à l'écran une grille de 10 lignes et 10 colonnes.
 	- afficher_introduction        : Cette fonction affiche à l'utilisateur des instructions concernant le jeu 
@@ -19,6 +21,16 @@
 #include <time.h>
 
 #include "bits.h"
+
+/****************************************************************************************
+								DÉFINITIONS DE CONSTANTES
+****************************************************************************************/
+/* Les réponses de l'utilisateur */
+
+#define RP_OUI_MIN 'o'
+#define RP_OUI_MAJ 'O'
+#define RP_NON_MIN 'n'
+#define RP_NON_MAJ 'N'
 
 /****************************************************************************************
 							DECLARATIONS DE FONCTIONS
@@ -89,40 +101,44 @@ int utilisateur_voit_son_nombre(void);
 ****************************************************************************************/
 int main(void)
 {
-	unsigned char list_test_bit; /* List des bits indiquant les bits n'ont pas être testé */
-	unsigned char resultat_bit;  /* Le résultat du devinette                              */
-	int i;                       /* Variable pour bloc FOR                                */
-	int indice;                  /* Indice de bit a tester                                */
-	int reponse_exist;           /* Reponse de l'utilisateur                              */
+	unsigned char liste_test_bit;     /* Liste des bits n'ont pas être testé */
+	unsigned char resultat_devinette; /* Le résultat du devinette            */
+	int i;                            /* Variable pour bloc FOR              */
+	int indice;                       /* Indice de bit a tester              */
+	int reponse_utilisateur;          /* Reponse de l'utilisateur            */
 
 	/* Initialiser des variables */
-	list_test_bit = 0;
-	resultat_bit = 0;
-	reponse_exist = 0;
+	liste_test_bit = 0;
+	resultat_devinette = 0;
+	reponse_utilisateur = 0;
 
 	/* Affichie l'introduction */
 	afficher_introduction();
 
-	for(i=0;i<7;i++)
+	for(i=0;i<NB_BITS_CHAR - 1;i++)
 	{
-		indice = indice_prochain_bit_a_tester(list_test_bit);
-		list_test_bit = set_bit(list_test_bit, indice, 1);
+		/* Obetient l'indice du bit à tester */
+		indice = indice_prochain_bit_a_tester(liste_test_bit); 
+		/* Mettre à jour la liste des bits à tester*/
+		liste_test_bit = set_bit(liste_test_bit, indice, 1);
+		/* Affiche à l'écran une grille de 10 lignes et 10 colonnes */
 		afficher_grille_nombre(indice);
-		reponse_exist = utilisateur_voit_son_nombre();
+		/* Demande à l'utilisateur s’il voit son nombre à l’écran */
+		reponse_utilisateur = utilisateur_voit_son_nombre();
 
 		printf("\n");
 
-		if(reponse_exist == 1)
+		if(reponse_utilisateur == 1)
 		{
-			resultat_bit = set_bit(resultat_bit, indice, 1);
+			resultat_devinette = set_bit(resultat_devinette, indice, 1);
 		}	
 	}
 
 	/* Affiche le résultat */
 	printf("\n");
 	printf("Le resultat :\n");
-	printf("%i - (",resultat_bit);
-	print_bits(resultat_bit);
+	printf("%i - (",resultat_devinette);
+	print_bits(resultat_devinette);
 	printf(")\n\n");
 
 	return EXIT_SUCCESS;
@@ -165,15 +181,24 @@ int indice_prochain_bit_a_tester(unsigned char car)
 {
 	int indice;	/* Indice du bit à tester */
 
-	/* Méthode 1 */
+	/* 
+		Méthode 1 :
+		On utilise directement la fonction nb_aleatoire() pour obtenir
+		un numéro entre 0 et 6. Ensuite, on vérifie si le indice de ce 
+		numéro a déjà être testé.
+	*/
 	do
 	{       
 		indice = nb_aleatoire(0, NB_BITS_CHAR - 2);
 	}while(get_bit(car, indice) == 1);
 
 	/*
-			Méthode 2 :
-			indice = nth_bit(car, 0, nb_aleatoire(1, count(car, 0)));
+		Méthode 2 :
+
+		Ce méthode va obtenir directement l'indice pas encore être 
+		testé en utilisant la fonction nth_bit()
+
+		indice = nth_bit(car, 0, nb_aleatoire(1, count(car, 0)));
 	*/
 
 	return indice;
@@ -196,7 +221,8 @@ void afficher_grille_nombre(int indice)
 			}
 			else
 			{
-				printf("    "); /* 4 espaces pour remplir les nombres n'ayant pas ce bit */
+				/* 4 espaces pour remplir les nombres n'ayant pas ce bit */
+				printf("    "); 
 			}
 			car++;
 		}
@@ -216,20 +242,21 @@ int utilisateur_voit_son_nombre(void)
 		Si l'utilisateur entre d'autre réponse, on va relancer ce bloc 
 		pour attendre une réponse correcte 
 	*/
-	while(reponse != 'o' && reponse != 'O' && reponse != 'n' && reponse != 'N')
+	while(reponse != RP_OUI_MIN && reponse != RP_OUI_MAJ && reponse != RP_NON_MIN && reponse != RP_NON_MAJ)
 	{ 
 		printf("Error : enter o ou n, svp");
 		printf("Voyez-vous votre nombre a l'ecran <o / n> ?");
 		scanf("%c", &reponse);
 	}
 
-	if(reponse == 'o' || reponse == 'O') /* Si l'utilisateur voit ce nombre */
+	if(reponse == RP_OUI_MIN || reponse == RP_OUI_MAJ) /* Si l'utilisateur voit ce nombre */
 	{
 		return 1;
 	}
-	else if(reponse == 'n' || reponse == 'N') /* Si l'utilisateur ne voit pas le nombre */
+	else if(reponse == RP_NON_MIN || reponse == RP_NON_MAJ) /* Si l'utilisateur ne voit pas le nombre */
 	{
 		return 0;
 	}
 }
+
 

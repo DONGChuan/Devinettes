@@ -6,9 +6,9 @@
 	caractère. Les fonctions offertes sont :
 	- get_bit    : Retourne la valeur d'un bit.
 	- set_bit    : Fixe la valeur d'un bit.
-	- set_bits   : Fixe la valeur des bits dans un intervalle donn?
+	- set_bits   : Fixe la valeur des bits dans un intervalle donné.
 	- flip_bit   : Inverse la valeur d'un bit.
-	- flip_bits  : Inverse la valeur des bits dans un intervalle donn?
+	- flip_bits  : Inverse la valeur des bits dans un intervalle donné.
 	- count      : Compte le nombre de bits valant 0 ou 1.
 	- nth_bit    : Retourne l'indice du nieme bit valant 0 ou 1.
 	- print_bits : Affiche les bits d'un caractère.
@@ -17,7 +17,7 @@
 
 
 
-/*	Si la constante de compilation MODULE_BITS existe déj? alors on ne compile pas
+/*	Si la constante de compilation MODULE_BITS existe déjà, alors on ne compile pas
 	le code qui suit.
 */
 #if !defined(MODULE_BITS)
@@ -44,10 +44,10 @@
 	Cette fonction retourne la valeur du ieme bit d'un caractère.
 
 	PARAMÈTRES :
-		- car        : Le caractère ?consulter (type : unsigned char).
-		- indice_bit : L'indice du bit ?consulter (type : int).
+		- car        : Le caractère à consulter (type : unsigned char).
+		- indice_bit : L'indice du bit à consulter (type : int).
 					   On suppose que ce paramètre se trouve dans l'intervalle
-					   [0, NB_BITS_CHAR[. Il est ?noter que le bit le moins
+					   [0, NB_BITS_CHAR[. Il est à noter que le bit le moins
 					   significatif porte l'indice 0.
 
 	VALEUR DE RETOUR : 1 si le bit vaut 1 et 0 sinon (type : int).
@@ -70,19 +70,19 @@ int get_bit(unsigned char car, int indice_bit);
 /*
 	SET_BIT
 
-	Cette fonction retourne le caractère reçu o?le bit spécifi?a ét?
-	fix??la valeur "valeur_bit".
+	Cette fonction retourne le caractère reçu où le bit spécifié a été
+	fixé à la valeur "valeur_bit".
 
 	PARAMÈTRES :
-		- car        : Le caractère ?modifier (type : unsigned char).
-		- indice_bit : L'indice du bit ?modifier (type : int).
+		- car        : Le caractère à modifier (type : unsigned char).
+		- indice_bit : L'indice du bit à modifier (type : int).
 					   On suppose que ce paramètre se trouve dans l'intervalle
-					   [0, NB_BITS_CHAR[. Il est ?noter que le bit le moins
+					   [0, NB_BITS_CHAR[. Il est à noter que le bit le moins
 					   significatif porte l'indice 0.
-	    - valeur_bit : La valeur ?assigner au bit (type : int).
+	    - valeur_bit : La valeur à assigner au bit (type : int).
 					   On suppose que ce paramètre se trouve dans l'intervalle [0, 1].
 
-	VALEUR DE RETOUR : Le caractère reçu o?le bit spécifi?possède désormais la
+	VALEUR DE RETOUR : Le caractère reçu où le bit spécifié possède désormais la
 					   valeur "valeur_bit" (type : unsigned char).
 
 	EXEMPLES D'APPEL :
@@ -101,22 +101,22 @@ unsigned char set_bit(unsigned char car, int indice_bit, int valeur_bit);
 /*
 	SET_BITS
 
-	Cette fonction retourne le caractère reçu o?les bits dans l'intervalle spécifi?
-	ont ét?fix??la valeur "valeur_bit".
+	Cette fonction retourne le caractère reçu où les bits dans l'intervalle spécifié
+	ont été fixé à la valeur "valeur_bit".
 
 	PARAMÈTRES :
-		- car          : Le caractère ?modifier (type : unsigned char).
-		- indice_debut : L'indice du premier bit ?modifier (type : int).
+		- car          : Le caractère à modifier (type : unsigned char).
+		- indice_debut : L'indice du premier bit à modifier (type : int).
 					     On suppose que ce paramètre se trouve dans l'intervalle
-					     [0, NB_BITS_CHAR[. Il est ?noter que le bit le moins
+					     [0, NB_BITS_CHAR[. Il est à noter que le bit le moins
 					     significatif porte l'indice 0.
-		- indice_fin   : L'indice du dernier bit ?modifier (type : int).
+		- indice_fin   : L'indice du dernier bit à modifier (type : int).
 					     On suppose que ce paramètre se trouve dans l'intervalle
 					     [indice_debut, NB_BITS_CHAR[.
-	    - valeur_bit   : La valeur ?assigner aux bits dans l'intervalle (type : int).
+	    - valeur_bit   : La valeur à assigner aux bits dans l'intervalle (type : int).
 					     On suppose que ce paramètre se trouve dans l'intervalle [0, 1].
 
-	VALEUR DE RETOUR : Le caractère reçu o?les bits dans l'intervalle spécifi?
+	VALEUR DE RETOUR : Le caractère reçu où les bits dans l'intervalle spécifié
 					   possède désormais la valeur "valeur_bit" (type : unsigned char).
 
 	EXEMPLES D'APPEL :
@@ -135,17 +135,17 @@ unsigned char set_bits(unsigned char car, int indice_debut, int indice_fin,
 /*
 	FLIP_BIT
 
-	Cette fonction retourne le caractère reçu o?l'on a invers?la valeur du
-	bit spécifi?
+	Cette fonction retourne le caractère reçu où l'on a inversé la valeur du
+	bit spécifié.
 
 	PARAMÈTRES :
 		- car        : Le caractère à modifier (type : unsigned char).
-		- indice_bit : L'indice du bit ?inverser (type : int).
+		- indice_bit : L'indice du bit à inverser (type : int).
 					   On suppose que ce paramètre se trouve dans l'intervalle
-					   [0, NB_BITS_CHAR[. Il est ?noter que le bit le moins
+					   [0, NB_BITS_CHAR[. Il est à noter que le bit le moins
 					   significatif porte l'indice 0.
 
-	VALEUR DE RETOUR : Le caractère reçu o?la valeur du bit spécifi?est
+	VALEUR DE RETOUR : Le caractère reçu où la valeur du bit spécifié est
 					   inversée (type : unsigned char).
 
 	EXEMPLES D'APPEL :
@@ -164,21 +164,21 @@ unsigned char flip_bit(unsigned char car, int indice_bit);
 /*
 	FLIP_BITS
 
-	Cette fonction retourne le caractère reçu o?l'on a invers?la valeur des
-	bits dans l'intervalle spécifi?
+	Cette fonction retourne le caractère reçu où l'on a inversé la valeur des
+	bits dans l'intervalle spécifié.
 
 	PARAMÈTRES :
-		- car          : Le caractère ?modifier (type : unsigned char).
-		- indice_debut : L'indice du premier bit ?modifier (type : int).
+		- car          : Le caractère à modifier (type : unsigned char).
+		- indice_debut : L'indice du premier bit à modifier (type : int).
 					     On suppose que ce paramètre se trouve dans l'intervalle
-					     [0, NB_BITS_CHAR[. Il est ?noter que le bit le moins
+					     [0, NB_BITS_CHAR[. Il est à noter que le bit le moins
 					     significatif porte l'indice 0.
-		- indice_fin   : L'indice du dernier bit ?modifier (type : int).
+		- indice_fin   : L'indice du dernier bit à modifier (type : int).
 					     On suppose que ce paramètre se trouve dans l'intervalle
 					     [indice_debut, NB_BITS_CHAR[.
 
-	VALEUR DE RETOUR : Le caractère reçu o?les bits dans l'intervalle spécifi?
-					   ont tous chang?de valeur (type : unsigned char).
+	VALEUR DE RETOUR : Le caractère reçu où les bits dans l'intervalle spécifié
+					   ont tous changé de valeur (type : unsigned char).
 
 	EXEMPLES D'APPEL :
 		unsigned char c = 'C';				// On sait que 'C' vaut 67 (= 01000011).
@@ -199,8 +199,8 @@ unsigned char flip_bits(unsigned char car, int indice_debut, int indice_fin);
 	Cette fonction retourne le nombre du caractère reçu valant "valeur_bit".
 
 	PARAMÈTRES :
-		- car        : Le caractère ?consulter (type : unsigned char).
-	    - valeur_bit : La valeur ?dénombrer dans le caractère (type : int).
+		- car        : Le caractère à consulter (type : unsigned char).
+	    - valeur_bit : La valeur à dénombrer dans le caractère (type : int).
 					   On suppose que ce paramètre se trouve dans l'intervalle [0, 1].
 
 	VALEUR DE RETOUR : Le nombre de bits valant "valeur_bit" dans le
@@ -220,10 +220,10 @@ int count(unsigned char car, int valeur_bit);
 	NTH_BIT
 
 	Cette fonction retourne l'indice du nieme bit dans un caractère dont la valeur
-	correspond ?"valeur_bit".
+	correspond à "valeur_bit".
 
 	PARAMÈTRES :
-		- car        : Le caractère ?consulter (type : unsigned char).
+		- car        : Le caractère à consulter (type : unsigned char).
 	    - valeur_bit : La valeur de bit recherchée (type : int).
 					   On suppose que ce paramètre se trouve dans l'intervalle [0, 1].
 		- n			 : L'occurrence cherchée (type : int).
@@ -255,7 +255,7 @@ int nth_bit(unsigned char car, int valeur_bit, int n);
 	Cette fonction affiche les bits d'un caractère.
 
 	PARAMÈTRES :
-		- car        : Le caractère ?consulter (type : unsigned char).
+		- car        : Le caractère à consulter (type : unsigned char).
 
 	VALEUR DE RETOUR : Aucune.
 
