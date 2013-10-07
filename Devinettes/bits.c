@@ -4,24 +4,24 @@
 
 	Ce module est de définir des fonctions de bits.h
 ****************************************************************************************/
-
-#include "bits.h"
 #include <stdio.h>
+#include "bits.h"
+
 
 /* count: Compte le nombre de bits valant 0 ou 1. */
 int count(unsigned char car, int valeur_bit){
 
-	int bit_in_char;       /* Valeur de chaque bit dans un caractère  */
+	int valeur_bit_char;   /* Valeur de chaque bit dans un caractère  */
 	int nb_valeur_bit = 0; /* Le nombre de bits valant "valeur_bit"   */
 	int i;                 /* Variable pour bloc FOR                  */
 
 	/* NB_BITS_CHAR est Nombre de bits dans un char                   */ 
 	for (i = 0; i < NB_BITS_CHAR; ++i) 
 	{
-		bit_in_char = (car >> i) & 1;  /* Obtenir un bit dans car     */
+		valeur_bit_char = (car >> i) & 1;  /* Obtenir un bit dans car */
 
 		/* S'il égale valeur_bit, on le compte                        */
-		if(bit_in_char == valeur_bit)  
+		if(valeur_bit_char == valeur_bit)  
 		{		
 			++nb_valeur_bit;
 		}
@@ -34,12 +34,12 @@ int count(unsigned char car, int valeur_bit){
 /* get_bit: Retourne la valeur d'un bit */
 int get_bit(unsigned char car, int indice_bit)
 {
-	char car_filp = 1; /* Filtrage pour trouver la position d'un bit         */
-	int valeur_bit;
-
-	car &= (car_filp << indice_bit); /* Mettre tous les autres bits à 0      */
-	car >>= indice_bit;              /* Déplacer le bit d'indice_bit à droit */
-	valeur_bit = car&1;              /* Obtenir la valeur de ce bit          */
+	char car_filtrage = 1; /* Filtrage pour trouver la position d'un bit        */
+	int valeur_bit;        /* Valeur du bit que l'on voudrais                   */
+	 
+	car &= (car_filtrage << indice_bit); /* Mettre tous les autres bits à 0     */
+	car >>= indice_bit;                  /* Déplace le bit d'indice_bit à droit */
+	valeur_bit = car&1;                  /* Obtient la valeur de ce bit         */
 
 	return valeur_bit;
 }
@@ -47,14 +47,13 @@ int get_bit(unsigned char car, int indice_bit)
 /* set_bit: Fixe la valeur d'un bit */
 unsigned char set_bit(unsigned char car, int indice_bit, int valeur_bit)
 {
-	char car_changed;  /* Le un caractère modifié                    */
-	char car_filp = 1; /* Filtrage pour trouver la position d'un bit */
-	int valeur_bit_car;
+	char car_change;   /* Le un caractère modifié                    */
+	int valeur_bit_car; /* Valeur du bit que l'on voudrais fixer      */
 
-	/* Obtenir la valeur du bit que l'on voudrais fixer              */
+	/* Obtenir la valeur du bit que l'on voudrais fixer               */
 	valeur_bit_car = car >> indice_bit & 1; 
 
-	car_changed = car;
+	car_change = car;
 
 	/* 
 		Si la valeur du bit déja égale valeur_bit, on n'a pas besoins 
@@ -63,10 +62,10 @@ unsigned char set_bit(unsigned char car, int indice_bit, int valeur_bit)
 	*/
 	if(valeur_bit_car != valeur_bit)
 	{
-		car_changed = flip_bit(car, indice_bit);
+		car_change = flip_bit(car, indice_bit);
 	}
 
-	return car_changed;
+	return car_change;
 }
 
 /* set_bits: Fixe la valeur des bits dans un intervalle donné */
@@ -89,13 +88,13 @@ unsigned char set_bits(unsigned char car, int indice_debut, int indice_fin, int 
 /* flip_bit : Inverse la valeur d'un bit */
 unsigned char flip_bit(unsigned char car, int indice_bit){
 
-	char car_filp = 1; /* C'est pour trouver la position d'un bit */
+	char car_filtrage = 1; /* Filtrage pour trouver la position d'un bit */
 
 	/*
 		Si indice_bit est 4, Le resultat de 1 << 4 est 0001 0000
 		Donc car ^ 0001 0000 va inverser la valeur de 5ieme bit
 	*/
-	car ^= (car_filp << indice_bit);
+	car ^= (car_filtrage << indice_bit);
 
 	return car;
 }

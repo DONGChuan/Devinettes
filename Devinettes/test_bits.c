@@ -4,16 +4,16 @@
 
 	Ce module sert à tester chacune des fonctions du module bits
 	
-	- main : Cette fonction réalise l'ensemble des tests en appelant toutes les fonctions
-			 de tests.
-	- tester_count : Cette fonction teste la fonction count.
-	- tester_flip_bit : Cette fonction teste la fonction flip_bit.
-	- tester_flip_bits : Cette fonction teste la fonction flip_bits.
-	- tester_get_bit : Cette fonction teste la fonction get_bit.
-	- tester_nth_bit : Cette fonction teste la fonction nth_bit.
+	- main              : Cette fonction réalise l'ensemble des tests en appelant toutes les fonctions
+			              de tests.
+	- tester_count      : Cette fonction teste la fonction count.
+	- tester_flip_bit   : Cette fonction teste la fonction flip_bit.
+	- tester_flip_bits  : Cette fonction teste la fonction flip_bits.
+	- tester_get_bit    : Cette fonction teste la fonction get_bit.
+	- tester_nth_bit    : Cette fonction teste la fonction nth_bit.
 	- tester_print_bits : Cette fonction teste la fonction print_bits.
-	- tester_set_bit : Cette fonction teste la fonction set_bit.
-	- tester_set_bits : Cette fonction teste la fonction set_bits.
+	- tester_set_bit    : Cette fonction teste la fonction set_bit.
+	- tester_set_bits   : Cette fonction teste la fonction set_bits.
 ****************************************************************************************/
 
 #include <stdio.h>
@@ -52,7 +52,6 @@ void tester_flip_bits(void);
 */
 void tester_get_bit(void);
 
-
 /*
 	TESTER_NTH_BIT
 
@@ -81,12 +80,12 @@ void tester_set_bit(void);
 */
 void tester_set_bits(void);
 
-
 /****************************************************************************************
 								FONCTION MAIN()
 ****************************************************************************************/
 int main(void)
 {
+	/* Lance tous les tests */
 	tester_count();
 	tester_flip_bit();
 	tester_flip_bits();

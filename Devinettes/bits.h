@@ -139,7 +139,7 @@ unsigned char set_bits(unsigned char car, int indice_debut, int indice_fin,
 	bit spécifi?
 
 	PARAMÈTRES :
-		- car        : Le caractère ?modifier (type : unsigned char).
+		- car        : Le caractère à modifier (type : unsigned char).
 		- indice_bit : L'indice du bit ?inverser (type : int).
 					   On suppose que ce paramètre se trouve dans l'intervalle
 					   [0, NB_BITS_CHAR[. Il est ?noter que le bit le moins
